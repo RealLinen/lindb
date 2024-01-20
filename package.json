@@ -1,0 +1,19 @@
+{
+  "name": "lindb",
+  "version": "1.0.1",
+  "description": "Lindb is a simple and lightweight Node.js database module designed for ease of use and flexibility. It includes built-in encryption features to secure your data. Lindb allows you to store and retrieve data using key-value pairs in a structured way.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RealLinen/lindb.git"
+  },
+  "author": "RealLinen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RealLinen/lindb/issues"
+  },
+  "homepage": "https://github.com/RealLinen/lindb#readme"
+}
