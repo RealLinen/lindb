@@ -47,7 +47,8 @@ const lindb = class {
             if (!confirmation) {
                 return;
             }
-            dbstorage.data = {};
+
+            data = {};
             this.saveAllData();
         }
         this.entries = function(key) { // gets all keys in data [ not its children ] and see if it's index matches key
@@ -125,14 +126,16 @@ const lindb = class {
             if (init.auto_save) {
                 this.saveAllData();
             }
+
+            this.data = data;
             return true;
         }
-        
         this.delete = function(key, multiple_index = true) {
             return this.set(key, undefined, multiple_index)
         }
         this.del = this.delete
     }
+    data = {}
 }
 
 /*
