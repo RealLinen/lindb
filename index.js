@@ -20,20 +20,20 @@ const lindb = class {
         init.auto_save = init.auto_save == undefined && true || init.auto_save;
         init.key = init.key || (init.encryptif_nokey && generateKey() || null);
 
+        let data = {}
         try {
-            this.data = fs.readFileSync(init.path, "utf-8");
+            data = fs.readFileSync(init.path, "utf-8");
             if (init.key) {
-                this.data = JSON.parse(encryption.decrypt(this.data, encryption.getKey(init.key)));
+                data = JSON.parse(encryption.decrypt(data, encryption.getKey(init.key)));
             } else {
-                this.data = JSON.parse(this.data);
+                data = JSON.parse(data);
             }
         } catch(err) {
-            this.data = {};
+            data = {};
         }
 
         this.saveAllData = function() {
-            console.log(this.data)
-            let stringified = JSON.stringify(this.data);
+            let stringified = JSON.stringify(data);
             fs.writeFileSync(init.path, (init.key && encryption.encrypt(stringified, encryption.getKey(init.key)) || stringified));
         }; this.saveAllData()
 
@@ -45,26 +45,26 @@ const lindb = class {
             dbstorage.data = {};
             this.saveAllData();
         }
-        this.entries = function(key) { // gets all keys in this.data [ not its children ] and see if it's index matches key
+        this.entries = function(key) { // gets all keys in data [ not its children ] and see if it's index matches key
             let list = {}
-            for (var index in this.data) {
+            for (var index in data) {
                 if (typeof(index) == "string" && index.includes(key)) {
-                    list[index] = this.data[index]
+                    list[index] = data[index]
                 }
             }
             return list
         }
-        this.get = function(key, multiple_index = true) { // return this.data[key]
+        this.get = function(key, multiple_index = true) { // return data[key]
             key = typeof(key) == "string" && key || null;
             if (!key) {
                 return null;
             }
 
             if(!multiple_index) {
-                return this.data[key]
+                return data[key]
             } else {
                 let split = key.split(typeof(multiple_index) == "string" && multiple_index || ".");
-                let base = this.data;
+                let base = data;
 
                 for (var index in split) {
                     let indvalue = split[index];
@@ -86,17 +86,17 @@ const lindb = class {
                 return base;
             }
         }
-        this.set = function(key, value, multiple_index = true) { // this.data[key] = value
+        this.set = function(key, value, multiple_index = true) { // data[key] = value
             key = typeof(key) == "string" && key || null;
             if (!key) {
                 return null;
             }
 
             if(!multiple_index) {
-                this.data[key] = value;
+                data[key] = value;
             } else {
                 let split = key.split(typeof(multiple_index) == "string" && multiple_index || ".");
-                let base = this.data;
+                let base = data;
 
                 for (var index in split) {
                     let indvalue = split[index];
