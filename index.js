@@ -32,6 +32,7 @@ const lindb = class {
         }
 
         this.saveAllData = function() {
+            console.log(this.data)
             let stringified = JSON.stringify(this.data);
             fs.writeFileSync(init.path, (init.key && encryption.encrypt(stringified, encryption.getKey(init.key)) || stringified));
         }; this.saveAllData()
