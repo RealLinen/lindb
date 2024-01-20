@@ -32,9 +32,14 @@ const lindb = class {
             data = {};
         }
 
+        this.listData = function() {
+            return data
+        }
+
         this.saveAllData = function() {
             let stringified = JSON.stringify(data);
             fs.writeFileSync(init.path, (init.key && encryption.encrypt(stringified, encryption.getKey(init.key)) || stringified));
+            this.data = data;
         }; this.saveAllData()
 
         // < ------_File Functions_------ > \\
@@ -115,14 +120,14 @@ const lindb = class {
                         base = base[indvalue];
                     }
                 }
-
-                return true;
             }
 
             if (init.auto_save) {
                 this.saveAllData();
             }
+            return true;
         }
+        
         this.delete = function(key, multiple_index = true) {
             return this.set(key, undefined, multiple_index)
         }

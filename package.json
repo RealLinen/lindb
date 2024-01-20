@@ -1,6 +1,6 @@
 {
   "name": "lindb",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "Lindb is a simple and lightweight Node.js database module designed for ease of use and flexibility. It includes built-in encryption features to secure your data. Lindb allows you to store and retrieve data using key-value pairs in a structured way.",
   "main": "index.js",
   "scripts": {
